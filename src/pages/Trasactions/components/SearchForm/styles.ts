@@ -27,6 +27,7 @@ input {
     color: ${props => props.theme['green-300']};
     font-weight: bold;
     border-radius: 6px;
+    cursor: pointer;
     
     &:hover {
       background: ${props => props.theme['green-500']};
