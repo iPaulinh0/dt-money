@@ -17,12 +17,14 @@ export function Transactions() {
 
   const [transactions, setTransactions] = useState<Transactions[]>([])
 
+  async function loadTransactions() {
+    const response = await fetch('http://localhost:3000/transactions')
+    const data = await response.json()
+    setTransactions(data)
+  }
+
   useEffect(() => {
-    fetch('http://localhost:3000/transactions')
-      .then(response => response.json())
-      .then(data => {
-        setTransactions(data)
-      })
+    loadTransactions()
   }, [])
 
   return(
@@ -36,7 +38,7 @@ export function Transactions() {
           <tbody>
             {transactions.map(transaction => {
               return(
-                <tr>
+                <tr key={transaction.id}>
                   <td width="50%">{transaction.description}</td>
                   <td>
                     <PriceHighlight variant={transaction.type}>{transaction.price}</PriceHighlight>
